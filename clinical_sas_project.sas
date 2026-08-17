@@ -22,19 +22,19 @@ ods noproctitle ;
 proc freq data= work.dm_clean;
 tables arm / nocum nopercent;
 title "Distribution of subjects across Treatment Arm ";
-run;
+quit;
 
 proc freq data = work.dm_clean ;
 tables race / nocum nopercent ;
 title "Distribution of subjects across Race in Treatment Arms";
-run;
+quit;
 
 proc tabulate data =work.dm_clean;
 class arm sex ;
 var age ;
 tables arm*sex, age*mean all ;
 title "Demogarphics of average age of subjects across Treatment Arms";
-run;
+quit;
 
 ods pdf close ;
 
@@ -42,15 +42,15 @@ libname sdtm xport "C:\Users\91936\Downloads\ae.xpt";
 proc copy in = sdtm out = work;
 run;
 proc contents data = work.ae;
-run;
+quit;
 
 proc sort data = work.ae;
 by usubjid;
-run;
+quit;
 
 proc sort data =work.dm_clean;
 by usubjid;
-run;
+quit;
 
 ods pdf file = "C:\Users\91936\Downloads\ae_output.pdf";
 ods noproctitle;
@@ -85,7 +85,7 @@ define aeterm/ display "Adverse Event";
 define aesev / display  "SEVERITY";
 define aeser / display "Level";
 title "Classification of Adverse events across Treatment Arms";
-run;
+quit;
 proc print data = work.ae_dm;
 run;
 
@@ -96,11 +96,11 @@ proc copy in = sdtm out = work;
 run;
 
 proc contents data =work.ex ;
-run;
+quit;
 
 proc sort data = work.ex nodupkey;
 by usubjid;
-run;
+quit;
 
 ods pdf file = "C:\Users\91936\Downloads\adsl.pdf" ;
 ods noproctitle;
