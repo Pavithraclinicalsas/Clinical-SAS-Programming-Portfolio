@@ -4,7 +4,7 @@ run;
 proc contents data = work.dm ;
 run;
 proc freq data =work.dm;
-tables arm;
+tables armcd;
 run;
 
 data work.dm_clean;
