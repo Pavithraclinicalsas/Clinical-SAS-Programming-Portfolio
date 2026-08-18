@@ -85,7 +85,7 @@ group by arm;
 quit;
 
 proc print data = work.ae_output ;
-title "Adverse events in 100 days of exposure ";
+title "Subjects with 1 or more Adverse events in 100 days of exposure ";
 run;
 
 proc report data = work.ae_listing nowd;
