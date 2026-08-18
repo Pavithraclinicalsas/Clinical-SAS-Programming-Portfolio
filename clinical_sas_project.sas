@@ -111,6 +111,13 @@ proc sort data = work.ex;
 by usubjid exstdtc;
 run;
 
+data work.ex;
+exstdt_num = input (exstdtc, yymmdd10.);
+format exstdt_num yymmdd10.;;
+exendt_num = input (exendtc, yymmdd10.);
+format exendt_num yymmdd10.;
+run;
+
 data work.ex_summary;
 set work.ex;
 by usubjid;
