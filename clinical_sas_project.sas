@@ -22,19 +22,19 @@ ods noproctitle ;
 proc freq data= work.dm_clean;
 tables arm / nocum nopercent;
 title "Distribution of subjects across Treatment Arm ";
-quit;
+run;
 
 proc freq data = work.dm_clean ;
-tables race / nocum nopercent ;
+tables arm*race / nocum nopercent ;
 title "Distribution of subjects across Race in Treatment Arms";
-quit;
+run;
 
 proc tabulate data =work.dm_clean;
 class arm sex ;
 var age ;
 tables arm*sex, age*mean all ;
 title "Demographics of average age of subjects across Treatment Arms";
-quit;
+run;
 
 ods pdf close ;
 
@@ -42,15 +42,15 @@ libname sdtm xport "C:\Users\91936\Downloads\ae.xpt";
 proc copy in = sdtm out = work;
 run;
 proc contents data = work.ae;
-quit;
+run;
 
 proc sort data = work.ae;
 by usubjid;
-quit;
+run;
 
 proc sort data =work.dm_clean;
 by usubjid;
-quit;
+run;
 
 ods pdf file = "C:\Users\91936\Downloads\ae_output.pdf";
 ods noproctitle;
@@ -105,13 +105,14 @@ libname sdtm xport "C:\Users\91936\Downloads\ex.xpt";
 proc copy in = sdtm out = work;
 run;
 proc contents data =work.ex ;
-quit;
+run;
 
 proc sort data = work.ex;
 by usubjid exstdtc;
 run;
 
 data work.ex;
+set work.ex;
 exstdt_num = input (exstdtc, yymmdd10.);
 format exstdt_num yymmdd10.;;
 exendt_num = input (exendtc, yymmdd10.);
