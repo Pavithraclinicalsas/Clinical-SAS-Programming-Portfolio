@@ -4,8 +4,11 @@ Hi, I'm Pavithra, a fresher in Clinical SAS Programming with a B.Tech in Biotech
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 Project: SDTM to ADSL, Demographics and Adverse Event Outputs
+
 File: cdisc_pilot_dm_adsl_ae.sas
+
 Data: Public CDISC Alzheimer's pilot study data (306 subjects, 3 treatment arms). The SDTM datasets DM, EX and AE were provided as XPT files. I did not map them from raw data. The programming of ADSL and all the outputs is mine.
+
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 What the program does:
