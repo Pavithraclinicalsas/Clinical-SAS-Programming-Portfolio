@@ -1,53 +1,84 @@
-# Clinical SAS Programming Portfolio
-## Pavithra | Fresher Clinical SAS Programmer | Chennai
+Clinical SAS Programming Portfolio
+-----------------------------------
+Hi, I'm Pavithra, a fresher in Clinical SAS Programming with a B.Tech in Biotechnology and a Post-Baccalaureate Diploma in Clinical SAS Programming. This repository has the SAS programs I have written while learning clinical trial data handling and CDISC standards.
 
-## About
-This portfolio demonstrates hands-on Clinical SAS programming 
-using the public CDISC Alzheimer's Disease Pilot Dataset.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+Project: SDTM to ADSL, Demographics and Adverse Event Outputs
+File: cdisc_pilot_dm_adsl_ae.sas
+Data: Public CDISC Alzheimer's pilot study data (306 subjects, 3 treatment arms). The SDTM datasets DM, EX and AE were provided as XPT files. I did not map them from raw data. The programming of ADSL and all the outputs is mine.
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-## Projects
+What the program does:
 
-### 1. SDTM Dataset Creation & Analysis
-**Domains:** DM (Demographics), AE (Adverse Events), EX (Exposure)
+---------
+1. DM
+---------
+Imported the XPT file, checked the structure and the treatment arms
+Removed screen failures, because they were not treated and are not part of the analysis
+Converted ISO 8601 character dates to numeric SAS dates.
 
-**What I did:**
-- Loaded and explored SDTM domains from XPT files
-- Cleaned and derived analysis variables
-- Performed incidence rate analysis per 100 exposure days
-- Generated TLFs using PROC REPORT, PROC FREQ, PROC TABULATE
-- Produced PDF outputs using ODS PDF
+---------
+2. EX
+---------
+Kept only records where a dose was given
+Took the first start date and last end date for each subject, because a subject has many EX records and exposure needs one start and one end date.
 
-**Key SAS techniques:**
-PROC SQL, PROC REPORT, PROC FREQ, 
-PROC TABULATE, ODS PDF, Data Step Merge
+---------
+3. ADSL
+---------
+Merged DM and EX to get one record per subject
+Derived SAFFL, TRTSDT, TRTEDT, TRTDUR, TRT01P and AGEGR1
 
----
+---------------
+4. Demographics
+---------------
+Number of subjects, age summary, sex and race by treatment arm
+Based on the safety population, as baseline tables normally are
 
-### 2. ADaM ADSL Development
-**Dataset:** ADSL (Subject Level Analysis Dataset)
+-----------------
+5. Adverse events
+-----------------
+AE listing, AE severity by treatment arm, and subjects with at least one AE (n and %)
+Each subject is counted once, and the denominator is all safety subjects in the arm
+Derivation notes
+SAFFL = "Y" if the subject has at least one EX record with a dose
+TRTDUR = TRTEDT - TRTSDT + 1 (the first day is counted)
+AGEGR1: <65, 65-80, >80
 
-**What I did:**
-- Merged SDTM domains (DM + EX) to build ADSL
-- Derived treatment dates (TRTSDT, TRTEDT, TRTDUR)
-- Created population flags (SAFFL)
-- Derived age groups (AGEGR1)
-- Validated against CDISC ADaM implementation guide
+----------------------
+QC checks in the code
+----------------------
+Record count vs distinct USUBJID in DM and ADSL (one record per subject)
+Frequency checks of SAFFL, AGEGR1 and treatment arm
+Checking the log for errors, warnings and merge notes
 
-**Key SAS techniques:**
-Data Step, PROC SQL, IF-THEN-ELSE, 
-Input/Format functions, In= flags
+----------------
+SAS skills used
+----------------
+DATA step, MERGE with IN= and BY-group processing, FIRST. processing, INPUT with informats and date handling, PROC SQL, PROC SORT, PROC CONTENTS, PROC FREQ, PROC MEANS, PROC TABULATE, PROC REPORT, ODS PDF, macro variable (%let)
 
----
+-------
+Output
+-------
+Three PDF outputs: demographics, AE summary and AE listing.
 
-## Dataset
-CDISC Pilot Alzheimer's Study — publicly available dataset
-used for CDISC standards training and demonstration.
+-----------
+How to run
+-----------
+Download dm.xpt, ex.xpt and ae.xpt from the public CDISC pilot dataset.
+Change the %let path = ...; line at the top of the program to your own folder.
+Run the program in SAS and check the log.
 
-## Tools
-- SAS 9.4
-- CDISC SDTM & ADaM standards
-- Pinnacle 21 Community (validation)
+----------------------------------------
+Limitations (what I'm still working on)
+----------------------------------------
+ADSL is basic and has only the main variables
+Tables and listings are simple, without full TLF shell formatting
+No exposure-adjusted AE rates yet
+I'm still learning regression analysis and SAS macros
 
-## Contact
-📧 [pavi112603@gmail.com]
-🔗 [www.linkedin.com/in/pavithrabaskarancontact]
+-------------------------------------------------------
+Contact
+Email: pavithrabaskaran11@gmail.com
+LinkedIn: linkedin.com/in/pavithrabaskarancontact
+-------------------------------------------------------
