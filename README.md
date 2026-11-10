@@ -30,7 +30,7 @@ Took the first start date and last end date for each subject, because a subject 
 3. ADSL
 ---------
 Merged DM and EX to get one record per subject
-Derived SAFFL, TRTSDT, TRTEDT, TRTDUR, TRT01P and AGEGR1
+Derived SAFFL, TRTSDT, TRTEDT, TRTDUR, TRT01P, TRT01A and AGEGR1
 
 ---------------
 4. Demographics
