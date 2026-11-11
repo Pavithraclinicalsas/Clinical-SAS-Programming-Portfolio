@@ -69,10 +69,12 @@ data work.adsl;
     if b then saffl = "Y";                                                                                                              
     else saffl = "N";                                                                                                                                                                                          
     trtsdt = first_exstdt;                                                                                                              
-    trtedt = last_exendt;                                                                                                               
+    trtedt = last_exendt;    
+    trtdur = last_exendt - first_exstdt;
     format trtsdt trtedt yymmdd10.;                                                                                                     
     if not missing(trtsdt) and not missing(trtedt) then                                                                                                                                                                                             
-    trt01p = arm;                                                                                                                                                                                                                                 
+    trt01p = arm;  
+    trt01a = actarm;
     if missing(age) then agegr1 = "";                                                                                                   
     else if age < 65 then agegr1 = "<65";                                                                                               
     else if age <= 80 then agegr1 = "65-80";                                                                                            
